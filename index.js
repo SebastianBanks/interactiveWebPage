@@ -2,17 +2,22 @@ let message = document.querySelector("#message")
 
 const deleteMovie = (evt) => {
     evt.target.parentNode.remove()
-    message.textContent = "Movie deleted!"
+    let deletedMovieTitle = evt.target.parentNode.firstElementChild.textContent
+    message.textContent = `${deletedMovieTitle} deleted!`
+    revealMessage()
 }
 
 const crossOffMovie = (evt) => {
     evt.target.classList.toggle("checked")
+    let movieText = evt.target.textContent
 
     if (evt.target.classList.contains("checked") === true) {
-        message.textContent = "Movie watched!"
+        
+        message.textContent = `${movieText} watched!`
     } else {
-        message.textContent = "Movie added back!"
+        message.textContent = `${movieText} added back!`
     }
+    revealMessage()
 }
 
 const addMovie = (evt) => {
@@ -35,7 +40,12 @@ const addMovie = (evt) => {
     ul.appendChild(movie)
 }
 
-
+const revealMessage = () => {
+    message.classList.remove("hide")
+    setTimeout(function() {
+        message.classList.add("hide")
+    }, 1000)
+}
 
 
 
